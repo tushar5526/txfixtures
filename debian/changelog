@@ -1,0 +1,41 @@
+txfixtures (0.4.3-1~ubuntu20.04.1) focal; urgency=medium
+
+  * New upstream release.
+  * Drop Python 2 support.
+  * Run tests with TWISTD_SCRIPT=/usr/bin/twistd3.
+  * Fix mongodb cleanup ordering.
+
+ -- Colin Watson <cjwatson@ubuntu.com>  Fri, 18 Feb 2022 22:19:53 +0000
+
+txfixtures (0.2.6-1) unstable; urgency=medium
+
+  * New upstream version 0.2.6
+
+    - Fixes test_no_expected_port_exit using a potentially open port (9999)
+      to exercise the service not opening a port (Closes: #851010)
+
+ -- Free Ekanayaka <freee@debian.org>  Wed, 18 Jan 2017 10:10:21 +0100
+
+txfixtures (0.2.5-1) unstable; urgency=medium
+
+  * New upstream version 0.2.5
+
+    - Fixes timeout being set with the wrong API causing flakiness in
+      test_non_executable_command (Closes: #850552)
+
+ -- Free Ekanayaka <freee@debian.org>  Sun, 08 Jan 2017 09:26:14 +0000
+
+txfixtures (0.2.3-1) unstable; urgency=medium
+
+  * New upstream version 0.2.3
+  * Build-depend on mongodb and selenium
+  * Export PBR_VERSION to avoid tests failing
+  * Build-Depend on procps
+
+ -- Free Ekanayaka <freee@debian.org>  Thu, 05 Jan 2017 23:36:50 +0000
+
+txfixtures (0.1.4-1) unstable; urgency=low
+
+  * Initial release (Closes: #845305)
+
+ -- Free Ekanayaka <freee@debian.org>  Tue, 22 Nov 2016 09:38:56 +0000

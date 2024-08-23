@@ -1,0 +1,28 @@
+From: Free Ekanayaka <freee@debian.org>
+Date: Thu, 5 Jan 2017 10:22:57 +0000
+Subject: skip-phantomjs-tests
+
+Skip PhantomJS tests since the phantomjs package in Debian does
+not support running headless.
+---
+ tests/test_phantomjs.py | 3 +++
+ 1 file changed, 3 insertions(+)
+
+Index: b/tests/test_phantomjs.py
+===================================================================
+--- a/tests/test_phantomjs.py
++++ b/tests/test_phantomjs.py
+@@ -1,4 +1,4 @@
+-from unittest import skipIf
++from unittest import skip, skipIf
+ 
+ from testtools import TestCase
+ 
+@@ -28,6 +28,7 @@
+ 
+         self.fixture = PhantomJS(reactor, timeout=10)
+ 
++    @skip("Debian's phantomjs can't run headless")
+     @skipIf(not hasTwist, "twist executable not available")
+     def test_webdriver(self):
+         """After setUp is run, the service is fully ready."""

@@ -1,0 +1,12 @@
+#!/usr/bin/make -f
+
+export PYBUILD_NAME=txfixtures
+
+# This is needed because of https://bugs.launchpad.net/pbr/+bug/1637729
+export PBR_VERSION=$(shell dpkg-parsechangelog -SVersion | sed -e 's/[-].*//')
+
+%:
+	dh $@ --with python3 --buildsystem=pybuild
+
+override_dh_auto_test:
+	TWISTD_SCRIPT=/usr/bin/twistd3 dh_auto_test

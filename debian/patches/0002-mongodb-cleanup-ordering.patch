@@ -1,0 +1,28 @@
+From: Colin Watson <cjwatson@canonical.com>
+Forwarded: https://github.com/testing-cabal/txfixtures/pull/18
+Subject: Fix mongodb cleanup ordering
+
+Cleanups are run in reverse order, so register the executor shutdown
+first so that it's run last.  This makes tests a little more reliable.
+
+Index: b/txfixtures/mongodb.py
+===================================================================
+--- a/txfixtures/mongodb.py
++++ b/txfixtures/mongodb.py
+@@ -33,13 +33,14 @@
+         self.addDataDir()
+         super(MongoDB, self)._setUp()
+         uri = "mongodb://localhost:%d" % self.port
+-        self.client = pymongo.MongoClient(uri, **self.clientKwargs)
+-        self.addCleanup(self.client.close)
+ 
+         # XXX Workaround pymongo leaving threads around.
+         if int(pymongo.version.split(".")[0]) >= 3:
+             self.addCleanup(pymongo.periodic_executor._shutdown_executors)
+ 
++        self.client = pymongo.MongoClient(uri, **self.clientKwargs)
++        self.addCleanup(self.client.close)
++
+     def _extraArgs(self):
+         return [
+             b"--port=%d" % self.port,
